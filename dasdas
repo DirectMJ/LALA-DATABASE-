@@ -1,0 +1,20 @@
+DELIMITER //
+
+CREATE FUNCTION fnCalculatePhilHealthContribution(p_BasicGross DECIMAL(18,2))
+RETURNS DECIMAL(18,2)
+DETERMINISTIC
+BEGIN
+    DECLARE v_contribution DECIMAL(18,2);
+
+    IF p_BasicGross <= 10000.00 THEN
+        SET v_contribution = p_BasicGross * 0.05;
+    ELSEIF p_BasicGross <= 99999.99 THEN
+        SET v_contribution = p_BasicGross * 0.06;
+    ELSE
+        SET v_contribution = p_BasicGross * 0.07;
+    END IF;
+
+    RETURN v_contribution;
+END//
+
+DELIMITER ;
